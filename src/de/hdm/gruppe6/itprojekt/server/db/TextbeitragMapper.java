@@ -175,8 +175,7 @@ public class TextbeitragMapper {
 		} finally {
 			DBVerbindung.closeAll(rs, stmt, con);
 		}
-		
-		return null;
+
 	}
 	
 
