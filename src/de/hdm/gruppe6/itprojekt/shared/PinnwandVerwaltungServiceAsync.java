@@ -80,6 +80,6 @@ public interface PinnwandVerwaltungServiceAsync {
 	void userLoeschen(User user, AsyncCallback<Void> callback);
 
 	void zaehleLikesZuTextbeitrag(Textbeitrag textbeitrag,
-			AsyncCallback<Textbeitrag> callback);
+			AsyncCallback<Integer> callback);
 
 }

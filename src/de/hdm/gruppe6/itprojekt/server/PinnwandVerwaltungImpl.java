@@ -145,7 +145,7 @@ public class PinnwandVerwaltungImpl extends RemoteServiceServlet implements Pinn
 		 public Abonnement findeAbosAnhandUser(User user)
 				      throws Exception {
 
-				    return this.abonnementMapper.findeAbosAnhandUser(user);
+				    return this.userMapper.findeAbosAnhandUser(user);
 				  }
 		
 		 
@@ -206,11 +206,11 @@ public class PinnwandVerwaltungImpl extends RemoteServiceServlet implements Pinn
 			 public Vector <Kommentar> findeKommentareZuTextbeitrag( Textbeitrag textbeitrag)
 				      throws Exception {
 
-				    return this.kommentarMapper.findeKommentareZuTextbeitrag(textbeitrag);
+				    return this.textbeitragMapper.findeKommentareZuTextbeitrag(textbeitrag);
 				  }
 			 
 			 
-			 public Textbeitrag zaehleLikesZuTextbeitrag(Textbeitrag textbeitrag)
+			 public int zaehleLikesZuTextbeitrag(Textbeitrag textbeitrag)
 		 		      throws Exception {
 
 		 		    return this.textbeitragMapper.zaehleLikesZuTextbeitrag(textbeitrag);

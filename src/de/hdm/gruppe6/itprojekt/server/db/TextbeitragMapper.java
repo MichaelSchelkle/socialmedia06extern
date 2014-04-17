@@ -167,7 +167,7 @@ public class TextbeitragMapper {
 			kommentar.setText(rs.getString("kommentar.Text"));
 			kommentar.setBeitragsId(rs.getInt("TextbeitragID"));
 				
-				return result;
+	
 			}
 		} catch (SQLException e2) {
 			e2.printStackTrace();
@@ -175,6 +175,7 @@ public class TextbeitragMapper {
 		} finally {
 			DBVerbindung.closeAll(rs, stmt, con);
 		}
+		return result;
 
 	}
 	
@@ -190,7 +191,6 @@ public class TextbeitragMapper {
 			
 			rs = stmt.executeQuery("SELECT COUNT(TextbeitragID) AS AnzahlLikes FROM Like WHERE TextbeitragID = " + textbeitrag.getId());
 				
-				return rs.getInt("AnzahlLikes");
 			
 		} catch (SQLException e2) {
 			e2.printStackTrace();
@@ -198,6 +198,7 @@ public class TextbeitragMapper {
 		} finally {
 			DBVerbindung.closeAll(rs, stmt, con);
 		}
+		  return rs.getInt("AnzahlLikes");
 		
 	}
 	

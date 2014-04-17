@@ -75,7 +75,7 @@ public interface PinnwandVerwaltungService extends RemoteService {
 	
 	public Vector <Kommentar> findeKommentareZuTextbeitrag( Textbeitrag textbeitrag) throws Exception;
 	
-	public Textbeitrag zaehleLikesZuTextbeitrag(Textbeitrag textbeitrag) throws Exception;
+	public int zaehleLikesZuTextbeitrag(Textbeitrag textbeitrag) throws Exception;
 			
 	public Vector <Textbeitrag> findeAlleTextbeitraege() throws Exception;
 					
