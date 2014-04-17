@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
+import de.hdm.gruppe6.itprojekt.shared.bo.Kommentar;
 import de.hdm.gruppe6.itprojekt.shared.bo.Textbeitrag;
 
 
@@ -145,25 +146,28 @@ public class TextbeitragMapper {
 		return result;
 		}
 	
-	/** ANDI UND GEZIM BITTE ÜBERARBEITEN!! 
-	public Vector <Textbeitrag> findeKommentareZuTextbeitrag(Textbeitrag textbeitrag) throws Exception {
+	
+	public Vector<Kommentar> findeKommentareZuTextbeitrag(Textbeitrag textbeitrag) throws Exception {
 		Connection con = DBVerbindung.connection();
 		ResultSet rs = null;
 		Statement stmt = null;
+		
+		Vector<Kommentar> result = new Vector<Kommentar>();
 		
 		try {
 			stmt = con.createStatement();
 			
 			rs = stmt.executeQuery("SELECT TextbeitragID, ErstellungsZeitpunkt, kommentar.Text, kommentar.ErstellungsZeitpunkt FROM textbeitrag INNER JOIN kommentar" 
-					+ "WHERE TextbeitragID=" + textbeitrag.getId() + " ORDER BY kommentar.ErstellungsZeitpunkt");
+					+ "ON TextbeitragID=" + textbeitrag.getId() + "ON textbeitrag.KommentarID = kommentar.KommentarID ORDER BY kommentar.ErstellungsZeitpunkt");
 			
-			if(rs.next()){
-				Textbeitrag beitrag = new Textbeitrag();
-				beitrag.setId(rs.getInt("TextbeitragID"));
-				beitrag.setErstellungsZeitpunkt(rs.getDate("ErstellungsZeitpunkt"));
-				beitrag.setText("text");
+			while(rs.next()){
+			Kommentar kommentar = new Kommentar();
+			kommentar.setId(rs.getInt("KommentarID"));
+			kommentar.setErstellungsZeitpunkt(rs.getDate("kommentar.ErstellungsZeitpunkt"));
+			kommentar.setText(rs.getString("kommentar.Text"));
+			kommentar.setBeitragsId(rs.getInt("TextbeitragID"));
 				
-				return beitrag;
+				return result;
 			}
 		} catch (SQLException e2) {
 			e2.printStackTrace();
@@ -174,28 +178,21 @@ public class TextbeitragMapper {
 		
 		return null;
 	}
-	**/
+	
 
-	/** STIMMT SO NICHT!! MUSS NOCH ÜBERARBEITET WERDEN !!!!!!!
-	public Textbeitrag zaehleLikesZuTextbeitrag(Textbeitrag textbeitrag) throws Exception {
+
+	public int zaehleLikesZuTextbeitrag(Textbeitrag textbeitrag) throws Exception {
 		Connection con = DBVerbindung.connection();
 		ResultSet rs = null;
 		Statement stmt = null;
 		
-		 * try {
+		  try {
 			stmt = con.createStatement();
 			
-			rs = stmt.executeQuery("SELECT TextbeitragID, ErstellungsZeitpunkt, kommentar.Text, kommentar.ErstellungsZeitpunkt FROM textbeitrag INNER JOIN kommentar" 
-					+ "WHERE TextbeitragID=" + textbeitrag.getId() + " ORDER BY kommentar.ErstellungsZeitpunkt");
-			
-			if(rs.next()){
-				Textbeitrag beitrag = new Textbeitrag();
-				beitrag.setId(rs.getInt("TextbeitragID"));
-				beitrag.setErstellungsZeitpunkt(rs.getDate("ErstellungsZeitpunkt"));
-				beitrag.setText("text");
+			rs = stmt.executeQuery("SELECT COUNT(TextbeitragID) AS AnzahlLikes FROM Like WHERE TextbeitragID = " + textbeitrag.getId());
 				
-				return textbeitrag;
-			}
+				return rs.getInt("AnzahlLikes");
+			
 		} catch (SQLException e2) {
 			e2.printStackTrace();
 			throw new Exception("Datenbank fehler!" + e2.toString());
@@ -203,9 +200,7 @@ public class TextbeitragMapper {
 			DBVerbindung.closeAll(rs, stmt, con);
 		}
 		
-		return null;
 	}
-	*/
 	
 	
 	}

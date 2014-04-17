@@ -8,6 +8,7 @@ public class Textbeitrag extends BusinessObject{
 	private static final long serialVersionUID = 1L;
 	
 	private String text;
+	private int likeId;
 	
 //Konstruktor	
 public Textbeitrag(String text){
@@ -24,5 +25,13 @@ public String getText() {
 
 public void setText(String text) {
 	this.text = text;
+}
+
+public int getLikeId() {
+	return likeId;
+}
+
+public void setLikeId(int likeId) {
+	this.likeId = likeId;
 }
 }

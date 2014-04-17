@@ -8,6 +8,7 @@ public class Kommentar extends BusinessObject{
 	private static final long serialVersionUID = 1L;
 	
 	private String text;
+	private int beitragsId = 0;
 	
 //Kontruktor	
 public Kommentar(String text){
@@ -24,5 +25,13 @@ public String getText() {
 
 public void setText(String text) {
 	this.text = text;
+}
+
+public int getBeitragsId() {
+	return beitragsId;
+}
+
+public void setBeitragsId(int beitragsId) {
+	this.beitragsId = beitragsId;
 }
 }
